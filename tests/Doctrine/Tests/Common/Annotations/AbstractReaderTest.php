@@ -238,6 +238,13 @@ abstract class AbstractReaderTest extends \PHPUnit_Framework_TestCase
     /**
      * @group regression
      */
+    public function testIncludeClassWhenIsIgnoreInAnnotations()
+    {
+        $reader = $this->getReader();
+        $reader->getPropertyAnnotations(new \ReflectionProperty('Doctrine\Tests\Common\Annotations\Fixtures\ClassWithIgnoredAnnotation', 'id'));
+        $this->assertFalse(class_exists('Doctrine\Tests\Common\Annotations\Fixtures\ClassNotBeIncluded', false));
+    }
+
     public function testMultipleAnnotationsOnSameLine()
     {
         $reader = $this->getReader();
